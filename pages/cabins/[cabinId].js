@@ -1,7 +1,14 @@
+import CabinView from "@/components/CabinView";
+import { getCabin } from "@/lib/data-service";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-function Cabin() {
+export async function getServerSideProps({ params }) {
+  const cabin = await getCabin(params.cabinId);
+  return { props: { cabin } };
+}
+
+function Cabin({ cabin }) {
   const router = useRouter();
 
   return (
@@ -9,7 +16,9 @@ function Cabin() {
       <Head>
         <title>Cabin {router.query.cabinId} // The Wild Oasis</title>
       </Head>
-      <div>Cabin {router.query.cabinId}</div>
+      <div className="">
+        <CabinView cabin={cabin} />
+      </div>
     </>
   );
 }
