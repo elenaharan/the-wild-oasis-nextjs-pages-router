@@ -5,7 +5,7 @@ import { getCabins } from "@/lib/data-service";
 //By the way we fetch data will determine whether the page will be SSG
 export async function getStaticProps() {
   const cabins = await getCabins();
-  return { props: { cabins } };
+  return { props: { cabins }, revalidate: 3600 };
 }
 
 function Cabins({ cabins }) {
