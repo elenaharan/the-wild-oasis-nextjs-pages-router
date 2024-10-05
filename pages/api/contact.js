@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 
 export default async function handler(req, res) {
   if (req.method !== "POST")
-    res.status(405).json({
+    return res.status(405).json({
       success: false,
       message: "Please make a POST request.",
     });
